@@ -1,4 +1,3 @@
-
 <html> 
 <head></head>
 
@@ -11,6 +10,12 @@
 <input type="password" name="password"/>
 
 <input type="submit"> Login! </input>
+
+</form>
+
+<form action="{{logout_url}}" method="POST"> Logout page
+
+<input type="submit"> Logout! </input>
 
 </form>
 
