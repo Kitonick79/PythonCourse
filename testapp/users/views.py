@@ -8,7 +8,7 @@ from flask import render_template
 from .models import User
 from flask import Blueprint
 
-app = Blueprint(__name__, __name__, template_folder='templates')
+app = Blueprint('users', __name__, template_folder='templates')
 
 
 def authCheck(f):
@@ -26,24 +26,25 @@ def login():
         session['username'] = username
     else:
         abort(403)
-    return redirect(url_for('testapp.common.views.index'))
+    return redirect(url_for('common.index'))
 
 
 @app.route('/login')
 def login_page():
-    rendered_template = render_template('login.tpl', login_url= url_for('testapp.users.views.login'))
+    rendered_template = render_template(
+        'login.tpl', 
+        login_url=url_for('.login'),
+        logout_url=url_for('.logout_page'),
+    )
     return make_response(rendered_template)
 
 
-@app.route('/logout_processor', methods = ['POST'])
-@authCheck
-def logout():
-    session['username'] = 'anonymous'
-    return redirect(url_for('testapp.common.views.index'))
-
-
-@app.route('/logout')
+@app.route('/logout', methods=['POST', 'GET'])
 def logout_page():
-    logout_url = url_for('testapp.users.views.logout')
-    rendered_template = render_template('logout.tpl', logout_url = logout_url)
-    return make_response(rendered_template)
+    if request.method == 'GET':
+        rendered_template = render_template('logout.tpl')
+        return make_response(rendered_template)
+    # method == POST
+    session['username'] = 'anonymous'
+    return redirect(url_for('common.index'))
+

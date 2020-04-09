@@ -13,13 +13,7 @@
 
 </form>
 
-<form action="{{logout_url}}" method="POST"> Logout page
-
-<input type="submit"> Logout! </input>
-
-</form>
-
+<a href="{{logout_url}}" > Logout page </a>
 </body>
-
 </html>
 

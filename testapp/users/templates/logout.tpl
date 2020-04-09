@@ -3,8 +3,7 @@
 
 <body>
 
-<form action="{{logout_url}}" method="POST"> Logout page
-
+<form action="" method="POST">
 <input type="submit"> Logout! </input>
 
 </form>
