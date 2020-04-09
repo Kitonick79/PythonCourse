@@ -1,4 +1,4 @@
-from testapp import app
+from testapp.app import app
+
 
 app.run()
-
